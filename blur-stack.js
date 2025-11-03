@@ -1,4 +1,4 @@
-// 🔹 Inject CSS automatically
+ // Inject CSS automatically
   (function injectBlurStackCSS() {
     const css = `
     [data-blur-stack] {
@@ -7,7 +7,6 @@
     }
     [data-blur-stack] > * {
       position: relative;
-      z-index: 2;
     }
     .blur-layer {
       position: absolute;
@@ -18,7 +17,6 @@
       -webkit-backdrop-filter: blur(0px);
       mask-image: none;
       -webkit-mask-image: none;
-      z-index: 1;
     }`;
     const style = document.createElement("style");
     style.textContent = css;
@@ -47,7 +45,7 @@
     return obj;
   }
 
-  // 🔹 Generate blur layers
+  // Generate blur layers
   function applyBlurStack(el) {
     const cfg = parseBlurData(el.dataset.blurStack || "");
     const steps = cfg.steps || 8;
@@ -59,6 +57,7 @@
 
     el.querySelectorAll(".blur-layer").forEach((l) => l.remove());
 
+    // Create blur layers
     for (let i = 0; i < steps; i++) {
       const blur = minBlur + (maxBlur - minBlur) * (i / (steps - 1));
       const start = i * overlap;
@@ -106,9 +105,16 @@
 
       el.appendChild(layer);
     }
+
+    // Raise content above all blur layers
+    const contentZ = steps + 5;
+    el.querySelectorAll(":scope > *:not(.blur-layer)").forEach((child) => {
+      child.style.zIndex = contentZ;
+      child.style.position = "relative";
+    });
   }
 
-  // 🔹 Initialize
+  // Initialize
   document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll("[data-blur-stack]").forEach(applyBlurStack);
   });
