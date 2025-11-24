@@ -113,6 +113,22 @@
       child.style.position = "relative";
     });
   }
+// Auto-detect newly added blur-stack elements
+const observer = new MutationObserver((mutations) => {
+  mutations.forEach((m) => {
+    m.addedNodes.forEach((node) => {
+      if (node.nodeType === 1) {
+        if (node.hasAttribute("data-blur-stack")) {
+          applyBlurStack(node);
+        }
+        node.querySelectorAll?.("[data-blur-stack]").forEach(applyBlurStack);
+      }
+    });
+  });
+});
+
+// Start watching the document
+observer.observe(document.body, { childList: true, subtree: true });
 
   // Initialize
   document.addEventListener("DOMContentLoaded", () => {
