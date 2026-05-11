@@ -15,10 +15,6 @@
     inset: 0;
     pointer-events: none;
     border-radius: inherit;
-    backdrop-filter: blur(0px);
-    -webkit-backdrop-filter: blur(0px);
-    mask-image: none;
-    -webkit-mask-image: none;
   }`;
   const style = document.createElement("style");
   style.textContent = css;
