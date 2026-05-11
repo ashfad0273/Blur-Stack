@@ -17,10 +17,7 @@ Quick link to the main script: https://github.com/ashfad0273/Blur-Stack/blob/mai
 1. Include `blur-stack.js` on your page (before the closing `</body>` is fine):
 
 ```html
-<!-- Local file -->
-<script src="blur-stack.js"></script>
 
-<!-- CDN (recommended quick test or remote hosting) -->
 <script src="https://cdn.jsdelivr.net/gh/ashfad0273/Blur-Stack@main/blur-stack.js"></script>
 ```
 
